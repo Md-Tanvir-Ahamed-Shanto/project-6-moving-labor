@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int           @id @default(autoincrement())
+  name        String
+  email       String        @unique
+  password    String
+  phone       String
+  role        Role          @default(user)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Booking     Booking[]
+  Quotes      Quotes[]
+  Testimonial Testimonial[]
+  Payment     Payment[]
+}
+
+model Service {
+  id           Int       @id @default(autoincrement())
+  serviceName  String
+  description  String
+  pricePerHour Float
+  availability Boolean   @default(true)
+  Booking      Booking[]
+}
+
+model Booking {
+  id                  Int           @id @default(autoincrement())
+  userId              Int
+  user                User          @relation(fields: [userId], references: [id])
+  serviceId           Int
+  service             Service       @relation(fields: [serviceId], references: [id])
+  bookingDate         DateTime
+  status              Status        @default(pending)
+  totalPrice          Float
+  specialInstructions String?
+  paymentStatus       PaymentStatus @default(pending)
+  createdAt           DateTime      @default(now())
+  Payment             Payment[]
+}
+
+model Quotes {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  user           User     @relation(fields: [userId], references: [id])
+  estimatedPrice Float
+  serviceType    String
+  distance       Float
+  weightEstimate Float
+  createdAt      DateTime @default(now())
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  uesrId    Int
+  user      User     @relation(fields: [uesrId], references: [id])
+  rating    Int
+  review    String
+  createdAt DateTime @default(now())
+}
+
+model Payment {
+  id            Int          @id @default(autoincrement())
+  userId        Int
+  user          User         @relation(fields: [userId], references: [id])
+  bookingId     Int
+  booking       Booking      @relation(fields: [bookingId], references: [id])
+  amountPaid    Float
+  paymentDate   DateTime
+  paymentMethod String
+  status        PaymentTable
+}
+
+enum Role {
+  admin
+  user
+}
+
+enum Status {
+  pending
+  confirmed
+  completed
+}
+
+enum PaymentStatus {
+  pending
+  paid
+  refunded
+}
+
+enum PaymentTable {
+  completed
+  failed
+}
