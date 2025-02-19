@@ -4,7 +4,7 @@ import {BiMenu} from "react-icons/bi"
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="flex sticky top-0 justify-between bg-blue-800 py-5 items-center">
+    <div className="flex sticky top-0 z-50 shadow-md shadow-blue-900 justify-between bg-blue-800 py-5 items-center">
       <div className="w-full flex justify-center ">Logo </div>
       <div className="w-full hidden md:block ">
         <Link
