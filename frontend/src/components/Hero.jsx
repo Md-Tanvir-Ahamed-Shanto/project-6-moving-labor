@@ -86,11 +86,11 @@ const Hero = () => {
         <div className='w-full'>
             {/* Contact Header */}
         <div className="flex justify-center md:mt-24 gap-4 mb-12">
-          <a href="tel:02080048117" className="flex items-center gap-2 bg-blue-800 text-white px-4 py-2 rounded hover:bg-blue-700">
+          <a href="tel:02080048117" className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
             <Phone size={20} />
             <span>020 8004 8117</span>
           </a>
-          <a href="mailto:info@ukmover.co.uk" className="flex items-center gap-2 bg-blue-800 text-white px-4 py-2 rounded hover:bg-blue-700">
+          <a href="mailto:info@ukmover.co.uk" className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
             <Mail size={20} />
             <span>info@ukmover.co.uk</span>
           </a>
