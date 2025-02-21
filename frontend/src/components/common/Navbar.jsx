@@ -27,9 +27,9 @@ const Navbar = () => {
         </Link>
         <Link
           className="text-white font-bold text-lg hover:bg-red-900 rounded-md p-2"
-          to={"/price"}
+          to={"/prices"}
         >
-          Price
+          Prices
         </Link>
         <Link
           className="text-white font-bold text-lg hover:bg-red-900 rounded-md p-2"
@@ -76,9 +76,9 @@ const Navbar = () => {
           </Link>
           <Link
             className="text-white font-bold text-lg hover:bg-red-900 rounded-md p-2"
-            to={"/price"}
+            to={"/prices"}
           >
-            Price
+            Prices
           </Link>
           <Link
             className="text-white font-bold text-lg hover:bg-red-900 rounded-md p-2"
