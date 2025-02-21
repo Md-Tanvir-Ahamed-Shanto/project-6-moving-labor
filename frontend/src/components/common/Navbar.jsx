@@ -21,7 +21,7 @@ const Navbar = () => {
         </Link>
         <Link
           className="text-white font-bold text-lg hover:bg-red-900 rounded-md p-2"
-          to={"/service"}
+          to={"/services"}
         >
           Service
         </Link>
@@ -70,7 +70,7 @@ const Navbar = () => {
           </Link>
           <Link
             className="text-white font-bold text-lg hover:bg-red-900 rounded-md p-2"
-            to={"/service"}
+            to={"/services"}
           >
             Service
           </Link>

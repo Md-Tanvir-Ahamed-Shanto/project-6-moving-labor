@@ -4,6 +4,7 @@ import Landing from "../Landing"
 import MovingProcess from "../MovingProcess"
 import ServiceSection from "../ServiceSection"
 import CompanyStrengths from "../CompanyStrengths"
+import AreasWeCover from "../AreasWeCover"
 
 const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ const HomePage = () => {
       <MovingProcess />
       <ServiceSection />
       <CompanyStrengths />
+      <AreasWeCover />
       <h1>Home Page</h1>
     </div>
   )
