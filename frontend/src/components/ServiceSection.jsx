@@ -21,6 +21,8 @@ import { BiCylinder, BiPackage, BiWorld } from "react-icons/bi";
 import ProcessStep from "./shared/ProcessStep";
 import FeatureCard from "./shared/FeatureCard";
 import PriceList from "./shared/PriceList";
+import OurProcess from "./OurProcess";
+import OurFeatures from "./OurFeatures";
 
 const ServiceSection = () => {
   const priceLists = [
@@ -75,61 +77,7 @@ const ServiceSection = () => {
     }
   ];
 
-  const processSteps = [
-    {
-      title: "Book Services",
-      description:
-        "Your service booking task has never been so easy, just call us or fill up the rest of the page or go to the online page and book the services.",
-    },
-    {
-      title: "Packing",
-      description:
-        "Packing packing your items, freight is difficult. Some of unpacking service for furniture's packing Crate packing If you have the right help, this can all be less daunting service.",
-    },
-    {
-      title: "Safely Moving",
-      description:
-        "We all have encountered problems during Moving. And want to ignore these fears and safely deliver any damage. We will give you trust.",
-    },
-    {
-      title: "Doorstep Delivery",
-      description:
-        "Are you worried about your delivery? UK Mover always delivers the items of your delivery at your doorstep next to time like you've not felt.",
-    },
-  ];
-
-  const features = [
-    {
-      icon: Clock,
-      title: "Free Booking",
-      description:
-        "Free the booking of your removal in no time, we work 24/7, providing same-day service with no time limit.",
-    },
-    {
-      icon: DollarSign,
-      title: "Affordable Pricing",
-      description:
-        "UK Mover provides market-proper services we serve is customer's satisfaction.",
-    },
-    {
-      icon: Globe,
-      title: "International Moves",
-      description:
-        "Move like International moves are done with UK Mover, just have a call to us and we make sure you are safe.",
-    },
-    {
-      icon: HeadphonesIcon,
-      title: "24/7 Service",
-      description:
-        "UK Mover provides road service to help you 24/7 with your concerns. Available any time of your services.",
-    },
-    {
-      icon: HeadphonesIcon,
-      title: "24/7 Service",
-      description:
-        "UK Mover provides road service to help you 24/7 with your concerns. Available any time of your services.",
-    },
-  ];
+  
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 space-y-24">
@@ -149,46 +97,10 @@ const ServiceSection = () => {
       </section>
 
       {/* Our Process Section */}
-      <section>
-        <h2 className="text-4xl font-bold text-blue-900 text-center mb-4">
-          Our Process
-        </h2>
-        <p className="text-gray-600 text-center mb-12">
-          Our Booking Process Is Very Simple And Easy, By Following The Steps
-          Mentioned Below, You Can Book Removals Services.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {processSteps.map((step, index) => (
-            <ProcessStep
-              key={index}
-              number={index + 1}
-              title={step.title}
-              description={step.description}
-            />
-          ))}
-        </div>
-      </section>
+      <OurProcess />
 
       {/* Our Features Section */}
-      <section>
-        <h2 className="text-4xl font-bold text-blue-900 text-center mb-4">
-          Our Features
-        </h2>
-        <p className="text-gray-600 text-center mb-12">
-          Delivering Convenient And Great Free Removal Services To Give Our
-          Customers & Make Reliable And Satisfactory Experience.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <FeatureCard
-              key={index}
-              Icon={feature.icon}
-              title={feature.title}
-              description={feature.description}
-            />
-          ))}
-        </div>
-      </section>
+     <OurFeatures />
     </div>
   );
 };
