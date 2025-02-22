@@ -22,7 +22,7 @@ const LoginPage = () => {
     try {
       // Add your authentication logic here
       // For demo purposes, using basic validation
-      if (formData.email === 'admin@example.com' && formData.password === 'admin123') {
+      if (formData.email === 'admin@.com' && formData.password === 'admin123') {
         navigate('/admin');
       } else {
         setError('Invalid credentials');

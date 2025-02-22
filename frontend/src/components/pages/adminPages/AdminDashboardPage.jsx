@@ -1,17 +1,18 @@
 import  { useState } from 'react';
 import { FaUsers, FaTruck, FaChartLine, FaCalendarAlt, FaCog } from 'react-icons/fa';
+import Contact from './Contact';
 
 const AdminDashboardPage = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
 
   const stats = [
-    { title: 'Total Bookings', value: '156', icon: <FaCalendarAlt /> },
+    { title: 'Total contact', value: '156', icon: <FaCalendarAlt /> },
     { title: 'Active Services', value: '8', icon: <FaTruck /> },
     { title: 'Total Customers', value: '324', icon: <FaUsers /> },
     { title: 'Monthly Revenue', value: '£15,680', icon: <FaChartLine /> },
   ];
 
-  const recentBookings = [
+  const recentcontact = [
     { id: 1, customer: 'John Doe', service: 'House Removal', date: '2024-02-20', status: 'Pending' },
     { id: 2, customer: 'Jane Smith', service: 'Office Removal', date: '2024-02-19', status: 'Completed' },
     { id: 3, customer: 'Mike Johnson', service: 'Piano Moving', date: '2024-02-18', status: 'In Progress' },
@@ -34,12 +35,12 @@ const AdminDashboardPage = () => {
             <FaChartLine className="mr-3" /> Dashboard
           </button>
           <button
-            onClick={() => setActiveTab('bookings')}
+            onClick={() => setActiveTab('contact')}
             className={`w-full flex items-center px-6 py-3 ${
-              activeTab === 'bookings' ? 'bg-blue-700' : 'hover:bg-blue-700'
+              activeTab === 'contact' ? 'bg-blue-700' : 'hover:bg-blue-700'
             }`}
           >
-            <FaCalendarAlt className="mr-3" /> Bookings
+            <FaCalendarAlt className="mr-3" /> Contact
           </button>
           <button
             onClick={() => setActiveTab('services')}
@@ -91,9 +92,9 @@ const AdminDashboardPage = () => {
               ))}
             </div>
 
-            {/* Recent Bookings Table */}
+            {/* Recent contact Table */}
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h3 className="text-xl font-semibold mb-4">Recent Bookings</h3>
+              <h3 className="text-xl font-semibold mb-4">Recent contact</h3>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
@@ -107,7 +108,7 @@ const AdminDashboardPage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {recentBookings.map((booking) => (
+                    {recentcontact.map((booking) => (
                       <tr key={booking.id} className="border-t">
                         <td className="p-3">{booking.id}</td>
                         <td className="p-3">{booking.customer}</td>
@@ -135,10 +136,10 @@ const AdminDashboardPage = () => {
         )}
 
         {/* Other tab contents can be added here */}
-        {activeTab === 'bookings' && (
+        {activeTab === 'contact' && (
           <div>
-            <h2 className="text-2xl font-bold mb-6">Bookings Management</h2>
-            {/* Add bookings management content */}
+            <h2 className="text-2xl font-bold mb-6">Contact Management</h2>
+           <Contact />
           </div>
         )}
 

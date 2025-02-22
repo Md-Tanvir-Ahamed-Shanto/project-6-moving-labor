@@ -7,6 +7,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  admin
+  user
+}
+
+enum Status {
+  pending
+  confirmed
+  completed
+}
+
+enum PaymentStatus {
+  pending
+  paid
+  refunded
+}
+
+enum PaymentTable {
+  completed
+  failed
+}
+
 model User {
   id          Int           @id @default(autoincrement())
   name        String
@@ -78,24 +100,9 @@ model Payment {
   status        PaymentTable
 }
 
-enum Role {
-  admin
-  user
-}
-
-enum Status {
-  pending
-  confirmed
-  completed
-}
-
-enum PaymentStatus {
-  pending
-  paid
-  refunded
-}
-
-enum PaymentTable {
-  completed
-  failed
+model Contact {
+  id      Int  @id @default(autoincrement())
+  email   Json
+  phone   Json
+  address Json
 }

@@ -16,7 +16,6 @@ const HomePage = () => {
       <ServiceSection />
       <CompanyStrengths />
       <AreasWeCover />
-      <h1>Home Page</h1>
     </div>
   )
 }
