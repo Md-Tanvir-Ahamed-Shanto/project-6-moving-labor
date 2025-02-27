@@ -9,6 +9,7 @@ import ContactPage from "./components/pages/ContactPage";
 import LoginPage from "./components/pages/LoginPage";
 import PricePage from "./components/pages/PricePage";
 import AdminDashboardPage from "./components/pages/adminPages/AdminDashboardPage";
+import BookingPage from "./components/pages/BookingPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/prices" element={<PricePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/booking" element={<BookingPage />} />
         <Route path="/admin" element={<AdminDashboardPage />} />
       </Routes>
       <Footer />
