@@ -69,6 +69,12 @@ model Statistic {
   description String
 }
 
+model Social {
+  id          Int    @id @default(autoincrement())
+  socialName  String
+  url         String
+}
+
 model Booking {
   id                  Int           @id @default(autoincrement())
   userId              Int
@@ -111,4 +117,37 @@ model Contact {
   email   String
   phone   String
   address String
+}
+
+model AboutUs {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+}
+
+model Message {
+  id      Int    @id @default(autoincrement())
+  name    String
+  email   String
+  subject String
+  message String
+}
+
+model Hero {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+  imageUrl   String
+}
+
+model Converage {
+  id      Int    @id @default(autoincrement())
+  title   String
+}
+
+model Blog {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+  imageUrl   String
 }
