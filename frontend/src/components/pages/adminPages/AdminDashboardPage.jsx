@@ -1,21 +1,48 @@
-import  { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaUsers, FaTruck, FaChartLine, FaCalendarAlt, FaCog } from 'react-icons/fa';
+import axios from 'axios';
 import Contact from './Contact';
+import Services from './Services';
+import Customers from './Customers';
+import AboutUs from './AboutUs';
+import Messages from './Messages';
+import Hero from './Hero';
+import Coverage from './Coverage';
+import Blog from './Blog';
 
 const AdminDashboardPage = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [statistics, setStatistics] = useState([]);
+  const [recentBookings, setRecentBookings] = useState([]);
+
+  useEffect(() => {
+    fetchStatistics();
+    fetchRecentBookings();
+  }, []);
+
+  const fetchStatistics = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/statistic');
+      setStatistics(response.data);
+    } catch (error) {
+      console.error('Error fetching statistics:', error);
+    }
+  };
+
+  const fetchRecentBookings = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/booking');
+      setRecentBookings(response.data.slice(0, 5)); // Get only the 5 most recent bookings
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    }
+  };
 
   const stats = [
-    { title: 'Total contact', value: '156', icon: <FaCalendarAlt /> },
+    { title: 'Total Bookings', value: statistics.length || '0', icon: <FaCalendarAlt /> },
     { title: 'Active Services', value: '8', icon: <FaTruck /> },
     { title: 'Total Customers', value: '324', icon: <FaUsers /> },
     { title: 'Monthly Revenue', value: '£15,680', icon: <FaChartLine /> },
-  ];
-
-  const recentcontact = [
-    { id: 1, customer: 'John Doe', service: 'House Removal', date: '2024-02-20', status: 'Pending' },
-    { id: 2, customer: 'Jane Smith', service: 'Office Removal', date: '2024-02-19', status: 'Completed' },
-    { id: 3, customer: 'Mike Johnson', service: 'Piano Moving', date: '2024-02-18', status: 'In Progress' },
   ];
 
   return (
@@ -59,12 +86,44 @@ const AdminDashboardPage = () => {
             <FaUsers className="mr-3" /> Customers
           </button>
           <button
-            onClick={() => setActiveTab('settings')}
+            onClick={() => setActiveTab('hero')}
             className={`w-full flex items-center px-6 py-3 ${
-              activeTab === 'settings' ? 'bg-blue-700' : 'hover:bg-blue-700'
+              activeTab === 'hero' ? 'bg-blue-700' : 'hover:bg-blue-700'
             }`}
           >
-            <FaCog className="mr-3" /> Settings
+            <FaCog className="mr-3" /> Hero
+          </button>
+          <button
+            onClick={() => setActiveTab('about')}
+            className={`w-full flex items-center px-6 py-3 ${
+              activeTab === 'about' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaCog className="mr-3" /> About Us
+          </button>
+          <button
+            onClick={() => setActiveTab('messages')}
+            className={`w-full flex items-center px-6 py-3 ${
+              activeTab === 'messages' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaCog className="mr-3" /> Messages
+          </button>
+          <button
+            onClick={() => setActiveTab('coverage')}
+            className={`w-full flex items-center px-6 py-3 ${
+              activeTab === 'coverage' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaCog className="mr-3" /> Coverage
+          </button>
+          <button
+            onClick={() => setActiveTab('blog')}
+            className={`w-full flex items-center px-6 py-3 ${
+              activeTab === 'blog' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaCog className="mr-3" /> Blog
           </button>
         </nav>
       </div>
@@ -92,9 +151,9 @@ const AdminDashboardPage = () => {
               ))}
             </div>
 
-            {/* Recent contact Table */}
+            {/* Recent Bookings Table */}
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h3 className="text-xl font-semibold mb-4">Recent contact</h3>
+              <h3 className="text-xl font-semibold mb-4">Recent Bookings</h3>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
@@ -108,7 +167,7 @@ const AdminDashboardPage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {recentcontact.map((booking) => (
+                    {recentBookings.map((booking) => (
                       <tr key={booking.id} className="border-t">
                         <td className="p-3">{booking.id}</td>
                         <td className="p-3">{booking.customer}</td>
@@ -146,21 +205,44 @@ const AdminDashboardPage = () => {
         {activeTab === 'services' && (
           <div>
             <h2 className="text-2xl font-bold mb-6">Services Management</h2>
-            {/* Add services management content */}
+            <Services />
           </div>
         )}
 
         {activeTab === 'customers' && (
           <div>
             <h2 className="text-2xl font-bold mb-6">Customer Management</h2>
-            {/* Add customer management content */}
+            <Customers />
           </div>
         )}
-
-        {activeTab === 'settings' && (
+        {activeTab === 'hero' && (
           <div>
-            <h2 className="text-2xl font-bold mb-6">Settings</h2>
-            {/* Add settings content */}
+            <h2 className="text-2xl font-bold mb-6">Hero Management</h2>
+            <Hero />
+          </div>
+        )}
+        {activeTab === 'about' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">About Us Management</h2>
+            <AboutUs />
+          </div>
+        )}
+        {activeTab === 'messages' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Messages Management</h2>
+            <Messages />
+          </div>
+        )}
+        {activeTab === 'coverage' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Coverage Areas Management</h2>
+            <Coverage />
+          </div>
+        )}
+        {activeTab === 'blog' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Blog Management</h2>
+            <Blog />
           </div>
         )}
       </div>
