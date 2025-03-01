@@ -1,9 +1,25 @@
+import { useEffect, useState } from "react";
+import { base_uel } from "../../config/config";
+import axios from "axios";
 
 const ContactPage = () => {
+  const [contact, setContact] = useState([]); 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add form submission logic here
   };
+  const fetchData = async ()=>{
+    try {
+      const res = await axios.get(`${base_uel}/contact`)
+      setContact(res.data[0])
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
+
+  useEffect(()=>{
+    fetchData()
+  },[]);
 
   return (
     <div className="w-full">
@@ -22,9 +38,7 @@ const ContactPage = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Address</h3>
-              <p className="mb-1">Head Office: 70-72 Rushey Green SE6 4JD,</p>
-              <p className="mb-1">London, UK.</p>
-              <p>Branch: suite 14,8 Deer park road SW19 3GY Wimbledon Surrey London</p>
+              <p className="mb-1">Head Office: {contact?.address}</p>
             </div>
 
             {/* Phone */}
@@ -35,9 +49,13 @@ const ContactPage = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Phone</h3>
-              <p className="mb-1">0208 0048115</p>
-              <p className="mb-1">0208 0048117</p>
-              <p>0798 5181863</p>
+              {
+               contact?.phone && (
+                contact?.phone?.map((phone, index) => (
+                  <p key={index}>{phone}</p>
+                ))
+               )
+              }
             </div>
 
             {/* Email */}
@@ -48,7 +66,13 @@ const ContactPage = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">E-Mail</h3>
-              <p>info@ukmover.co.uk</p>
+              {
+               contact?.email && (
+                contact?.email?.map((email, index) => (
+                  <p key={index}>{email}</p>
+                ))
+               )
+              }
             </div>
           </div>
         </div>

@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 
 const Footer = () => {
   const [contact, setContact] = useState([]);
-  console.log(contact)
   const fetchData = async ()=>{
     try {
       const res = await axios.get(`${base_uel}/contact`)
@@ -94,7 +93,13 @@ const Footer = () => {
             <div className='w-24 p-[1px] bg-red-500'></div>
             <div className="space-y-2">
               <p>Head Office: {contact?.address}</p>
-              <p>{contact?.email}</p>
+              {
+               contact?.email && (
+                contact?.email?.map((email, index) => (
+                  <p key={index}>{email}</p>
+                ))
+               )
+              }
               {
                contact?.phone && (
                 contact?.phone?.map((phone, index) => (
