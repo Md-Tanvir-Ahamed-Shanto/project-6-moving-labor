@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import { base_uel } from '../../../config/config';
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -9,7 +10,7 @@ const Services = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    icon: '',
+    imageUrl: '',
     price: ''
   });
 
@@ -19,7 +20,7 @@ const Services = () => {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/service');
+      const response = await axios.get(`${base_uel}/service`);
       setServices(response.data);
     } catch (error) {
       console.error('Error fetching services:', error);
@@ -37,9 +38,9 @@ const Services = () => {
     e.preventDefault();
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:5000/api/service/${editId}`, formData);
+        await axios.put(`${base_uel}/service/${editId}`, formData);
       } else {
-        await axios.post('http://localhost:5000/api/service', formData);
+        await axios.post(`${base_uel}/service`, formData);
       }
       resetForm();
       fetchServices();
@@ -52,7 +53,7 @@ const Services = () => {
     setFormData({
       title: service.title,
       description: service.description,
-      icon: service.icon,
+      imageUrl: service.imageUrl,
       price: service.price
     });
     setIsEditing(true);
@@ -62,7 +63,7 @@ const Services = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this service?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/service/${id}`);
+        await axios.delete(`${base_uel}/service/${id}`);
         fetchServices();
       } catch (error) {
         console.error('Error deleting service:', error);
@@ -74,7 +75,7 @@ const Services = () => {
     setFormData({
       title: '',
       description: '',
-      icon: '',
+      imageUrl: '',
       price: ''
     });
     setIsEditing(false);
@@ -111,11 +112,11 @@ const Services = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Icon</label>
+            <label className="block text-sm font-medium text-gray-700">Image Url</label>
             <input
               type="text"
-              name="icon"
-              value={formData.icon}
+              name="imageUrl"
+              value={formData.imageUrl}
               onChange={handleInputChange}
               className="mt-1 w-full px-3 py-2 border rounded-md"
               required

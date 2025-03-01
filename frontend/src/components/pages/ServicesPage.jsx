@@ -1,54 +1,25 @@
+import axios from "axios";
 import OurFeatures from "../OurFeatures";
 import OurProcess from "../OurProcess";
+import { base_uel } from "../../config/config";
+import { useEffect, useState } from "react";
 
 const ServicesPage = () => {
-  const services = [
-    {
-      title: "House Removals",
-      image: "https://ukmover.co.uk/images/House-removals.jpg",
-      id: 1,
-    },
-    {
-      title: "Flat Removals",
-      image: "/images/flat-removals.jpg",
-      id: 2,
-    },
-    {
-      title: "Office Removals",
-      image: "/images/office-removals.jpg",
-      id: 3,
-    },
-    {
-      title: "Furniture Removals",
-      image: "/images/furniture-removals.jpg",
-      id: 4,
-    },
-    {
-      title: "Piano Removals",
-      image: "/images/piano-removals.jpg",
-      id: 5,
-    },
-    {
-      title: "Parcels & Packaged Items",
-      image: "/images/parcels.jpg",
-      id: 6,
-    },
-    {
-      title: "Cleaning Services",
-      image: "/images/cleaning-services.jpg",
-      id: 7,
-    },
-    {
-      title: "Packing Material",
-      image: "/images/packing-material.jpg",
-      id: 8,
-    },
-    {
-      title: "Packing Services",
-      image: "/images/packing-services.jpg",
-      id: 9,
-    },
-  ];
+  const [services, setServices] = useState([]);
+ 
+  const fetchData = async  ()=>{
+    try {
+      let res = await axios.get(`${base_uel}/service`)
+      if(res.data){
+        setServices(res.data)
+      }
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
+  useEffect(()=>{
+    fetchData()
+  },[])
 
   return (
     <div className="w-full py-12">
@@ -70,7 +41,7 @@ const ServicesPage = () => {
             >
               <div className="aspect-video">
                 <img
-                  src={service.image}
+                  src={service.imageUrl}
                   alt={service.title}
                   className="w-full h-full object-cover rounded-lg"
                 />

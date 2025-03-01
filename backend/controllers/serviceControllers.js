@@ -3,15 +3,18 @@ const prisma = new PrismaClient();
 
 // Service controller
 const createService = async (req, res) => {
-  const { serviceName, imageUrl } = req.body;
+  const { title, imageUrl, description, price } = req.body;
+  let floatPrice = parseFloat(price);
   try {
-    if (!serviceName || !imageUrl) {
+    if (!title || !imageUrl) {
       return res.status(400).json({ error: "All fields are required" });
     }
     const service = await prisma.service.create({
       data: {
-        serviceName,
+        title,
         imageUrl,
+        description,
+        price: floatPrice,
       },
     });
     res.status(201).json({
@@ -54,14 +57,14 @@ const getServiceById = async (req, res) => {
 
 const updateService = async (req, res) => {
   const { id } = req.params;
-  const { serviceName, imageUrl } = req.body;
+  const { title, imageUrl } = req.body;
   try {
     const service = await prisma.service.update({
       where: {
         id: parseInt(id),
       },
       data: {
-        serviceName,
+        title,
         imageUrl,
       },
     });
