@@ -1,6 +1,23 @@
+import axios from 'axios';
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { base_uel } from '../../config/config';
+import { useEffect, useState } from 'react';
 
 const Footer = () => {
+  const [contact, setContact] = useState([]);
+  console.log(contact)
+  const fetchData = async ()=>{
+    try {
+      const res = await axios.get(`${base_uel}/contact`)
+      setContact(res.data[0])
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
+
+  useEffect(()=>{
+    fetchData()
+  },[]);
   return (
     <footer className="bg-primary  text-white py-8">
       <div className="container max-w-7xl mx-auto px-4">
@@ -76,11 +93,15 @@ const Footer = () => {
             <h2 className="text-3xl font-semibold">Contact Us</h2>
             <div className='w-24 p-[1px] bg-red-500'></div>
             <div className="space-y-2">
-              <p>Head Office: 70-72 Rushey Green SE6 4JD, London, UK.</p>
-              <p>info@TASmover.co.uk</p>
-              <p>0208 0048115</p>
-              <p>0208 0048117</p>
-              <p>07985 181863</p>
+              <p>Head Office: {contact?.address}</p>
+              <p>{contact?.email}</p>
+              {
+               contact?.phone && (
+                contact?.phone?.map((phone, index) => (
+                  <p key={index}>{phone}</p>
+                ))
+               )
+              }
             </div>
           </div>
         </div>

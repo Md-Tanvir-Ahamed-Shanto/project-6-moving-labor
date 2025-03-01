@@ -114,9 +114,9 @@ model Quotes {
 
 model Contact {
   id      Int    @id @default(autoincrement())
-  email   String
-  phone   String
-  address String
+  email   Json
+  phone   Json
+  address Json
 }
 
 model AboutUs {
