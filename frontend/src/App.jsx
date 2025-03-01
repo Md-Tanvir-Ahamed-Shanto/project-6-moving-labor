@@ -10,6 +10,7 @@ import LoginPage from "./components/pages/LoginPage";
 import PricePage from "./components/pages/PricePage";
 import AdminDashboardPage from "./components/pages/adminPages/AdminDashboardPage";
 import BookingPage from "./components/pages/BookingPage";
+import PrivateRoute from "./components/common/PrivateRoute";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route path="/prices" element={<PricePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/booking" element={<BookingPage />} />
-        <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route path="/admin" element={<PrivateRoute><AdminDashboardPage /></PrivateRoute>} />
       </Routes>
       <Footer />
     </BrowserRouter>

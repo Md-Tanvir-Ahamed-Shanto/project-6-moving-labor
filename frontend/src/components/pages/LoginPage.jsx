@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaLock, FaEnvelope } from 'react-icons/fa';
+import axios from 'axios';
+import { base_uel } from '../../config/config';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -9,6 +11,13 @@ const LoginPage = () => {
     password: '',
   });
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/admin');
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({
@@ -20,16 +29,14 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Add your authentication logic here
-      // For demo purposes, using basic validation
-      if (formData.email === 'admin@gmail.com' && formData.password === 'admin123') {
+      const response = await axios.post(`${base_uel}/login`, formData);
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
         navigate('/admin');
-      } else {
-        setError('Invalid credentials');
       }
     } catch (err) {
-        console.log("Login Error", err)
-      setError('Login failed. Please try again.');
+      console.log('Login Error', err);
+      setError('Invalid credentials');
     }
   };
 
