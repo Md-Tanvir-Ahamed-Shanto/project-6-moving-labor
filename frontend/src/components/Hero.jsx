@@ -10,7 +10,7 @@ const Hero = () => {
   const fetchData = async ()=>{
     try {
       const res = await axios.get(`${base_uel}/contact`)
-      setContact(res.data[0])
+      setContact(res?.data[0])
     } catch (error) {
       console.log("error", error)
     }
@@ -101,7 +101,7 @@ const Hero = () => {
         <div className='w-full'>
             {/* Contact Header */}
         <div className="flex justify-center md:mt-24 gap-4 mb-12">
-          <a href={`tel:${ contact?.phone[0]}`} className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
+          <a href={`tel:${contact?.phone?.[0]}`} className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
             <Phone size={20} />
             <span>
               {
@@ -110,7 +110,7 @@ const Hero = () => {
               }
             </span>
           </a>
-          <a href={`mailto:${contact?.email[0]}`} className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
+          <a href={`mailto:${contact?.email?.[0]}`} className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
             <Mail size={20} />
             <span>
               {
