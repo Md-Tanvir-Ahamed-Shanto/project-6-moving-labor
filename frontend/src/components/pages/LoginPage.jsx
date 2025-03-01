@@ -31,8 +31,12 @@ const LoginPage = () => {
     try {
       const response = await axios.post(`${base_uel}/login`, formData);
       if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        navigate('/admin');
+        if (response.data.role === 'admin') {
+          localStorage.setItem('token', response.data.token);
+          navigate('/admin');
+        } else {
+          navigate('/');
+        }
       }
     } catch (err) {
       console.log('Login Error', err);
