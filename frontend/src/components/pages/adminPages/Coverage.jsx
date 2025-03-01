@@ -63,7 +63,7 @@ const Coverage = () => {
               type="text"
               value={currentArea.title}
               onChange={(e) => setCurrentArea({ ...currentArea, title: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
               placeholder="Enter coverage area title"
             />

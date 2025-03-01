@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { FaUsers, FaTruck, FaChartLine, FaCalendarAlt, FaCog } from 'react-icons/fa';
+import { FaUsers, FaTruck, FaChartLine, FaCalendarAlt, FaVial, FaFacebookMessenger, FaLocationArrow, FaBlog, FaCogs, FaStar } from 'react-icons/fa';
+import { FcAbout } from "react-icons/fc";
 import axios from 'axios';
 import Contact from './Contact';
 import Services from './Services';
@@ -9,6 +10,9 @@ import Messages from './Messages';
 import Hero from './Hero';
 import Coverage from './Coverage';
 import Blog from './Blog';
+import Statistic from './Statistics';
+import Process from './Process';
+import Feature from './Feature';
 
 const AdminDashboardPage = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -91,7 +95,7 @@ const AdminDashboardPage = () => {
               activeTab === 'hero' ? 'bg-blue-700' : 'hover:bg-blue-700'
             }`}
           >
-            <FaCog className="mr-3" /> Hero
+            <FaVial className="mr-3" /> Hero
           </button>
           <button
             onClick={() => setActiveTab('about')}
@@ -99,7 +103,7 @@ const AdminDashboardPage = () => {
               activeTab === 'about' ? 'bg-blue-700' : 'hover:bg-blue-700'
             }`}
           >
-            <FaCog className="mr-3" /> About Us
+            <FcAbout  className="mr-3" /> About Us
           </button>
           <button
             onClick={() => setActiveTab('messages')}
@@ -107,7 +111,7 @@ const AdminDashboardPage = () => {
               activeTab === 'messages' ? 'bg-blue-700' : 'hover:bg-blue-700'
             }`}
           >
-            <FaCog className="mr-3" /> Messages
+            <FaFacebookMessenger className="mr-3" /> Messages
           </button>
           <button
             onClick={() => setActiveTab('coverage')}
@@ -115,7 +119,7 @@ const AdminDashboardPage = () => {
               activeTab === 'coverage' ? 'bg-blue-700' : 'hover:bg-blue-700'
             }`}
           >
-            <FaCog className="mr-3" /> Coverage
+            <FaLocationArrow className="mr-3" /> Coverage
           </button>
           <button
             onClick={() => setActiveTab('blog')}
@@ -123,8 +127,32 @@ const AdminDashboardPage = () => {
               activeTab === 'blog' ? 'bg-blue-700' : 'hover:bg-blue-700'
             }`}
           >
-            <FaCog className="mr-3" /> Blog
+            <FaBlog className="mr-3" /> Blog
           </button>
+          <button
+            onClick={() => setActiveTab('process')}
+            className={`w-full flex items-center px-6 py-3 ${
+              activeTab === 'process' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaCogs className="mr-3" /> Process
+          </button>
+          <button
+            onClick={() => setActiveTab('feature')}
+            className={`w-full flex items-center px-6 py-3 ${
+              activeTab === 'feature' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaStar className="mr-3" /> Features
+          </button>
+          <div
+            onClick={() => setActiveTab('statistic')}
+            className={`w-full flex items-center px-6 py-3 cursor-pointer ${
+              activeTab === 'statistic' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaChartLine className="mr-3" /> Statistics
+          </div>
         </nav>
       </div>
 
@@ -243,6 +271,26 @@ const AdminDashboardPage = () => {
           <div>
             <h2 className="text-2xl font-bold mb-6">Blog Management</h2>
             <Blog />
+          </div>
+        )}
+        {
+          activeTab ==='statistic' && (
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Statistics Management</h2>
+              <Statistic />
+            </div>
+          )
+        }
+        {activeTab === 'process' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Process Management</h2>
+            <Process />
+          </div>
+        )}
+        {activeTab === 'feature' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Feature Management</h2>
+            <Feature />
           </div>
         )}
       </div>
