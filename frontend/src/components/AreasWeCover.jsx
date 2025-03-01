@@ -2,9 +2,11 @@ import { MapPin } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { base_uel } from "../config/config"
+import LoadingSpinner from './shared/LoadingSpinner';
 
 const AreasWeCover = () => {
   const [areas, setAreas] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchAreas = async () => {
     try {
@@ -14,11 +16,17 @@ const AreasWeCover = () => {
       }
     } catch (error) {
       console.log("error", error)
+    } finally {
+      setLoading(false)
     }
   };
   useEffect(()=>{
     fetchAreas()
   },[])
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="py-12 px-4">
       <h2 className="text-3xl font-bold text-center text-[#0A4B8F] mb-8">
