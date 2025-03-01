@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { base_uel } from '../../../config/config';
 
 const Process = () => {
   const [processes, setProcesses] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [currentProcess, setCurrentProcess] = useState({
-    title: '',
+    processName: '',
     description: '',
     icon: ''
   });
@@ -16,7 +17,7 @@ const Process = () => {
 
   const fetchProcesses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/process');
+      const response = await axios.get(`${base_uel}/process`);
       setProcesses(response.data);
     } catch (error) {
       console.error('Error fetching processes:', error);
@@ -27,15 +28,15 @@ const Process = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`http://localhost:5000/api/process/${currentProcess.id}`, currentProcess);
+        await axios.put(`${base_uel}/process/${currentProcess.id}`, currentProcess);
         alert('Process updated successfully');
       } else {
-        await axios.post('http://localhost:5000/api/process', currentProcess);
+        await axios.post(`${base_uel}/process`, currentProcess);
         alert('Process created successfully');
       }
       fetchProcesses();
       setEditMode(false);
-      setCurrentProcess({ title: '', description: '', icon: '' });
+      setCurrentProcess({ processName: '', description: '', icon: '' });
     } catch (error) {
       alert('Operation failed');
       console.error('Error:', error);
@@ -50,7 +51,7 @@ const Process = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this process?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/process/${id}`);
+        await axios.delete(`${base_uel}/process/${id}`);
         alert('Process deleted successfully');
         fetchProcesses();
       } catch (error) {
@@ -67,13 +68,13 @@ const Process = () => {
       <form onSubmit={handleSubmit} className="mb-8 bg-white p-6 rounded-lg shadow-md">
         <div className="grid grid-cols-1 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Title</label>
+            <label className="block text-sm font-medium text-gray-700">Process Name</label>
             <input
               type="text"
-              name="title"
-              value={currentProcess.title}
-              onChange={(e) => setCurrentProcess({ ...currentProcess, title: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              name="processName"
+              value={currentProcess.processName}
+              onChange={(e) => setCurrentProcess({ ...currentProcess, processName: e.target.value })}
+              className="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
             />
           </div>
@@ -87,18 +88,6 @@ const Process = () => {
               required
               rows="3"
             ></textarea>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Icon</label>
-            <input
-              type="text"
-              name="icon"
-              value={currentProcess.icon}
-              onChange={(e) => setCurrentProcess({ ...currentProcess, icon: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              required
-              placeholder="Enter icon class or URL"
-            />
           </div>
         </div>
         <button
@@ -115,7 +104,7 @@ const Process = () => {
             <div className="text-4xl text-blue-600 mb-4">
               <i className={process.icon}></i>
             </div>
-            <h3 className="text-xl font-semibold mb-2">{process.title}</h3>
+            <h3 className="text-xl font-semibold mb-2">{process.processName}</h3>
             <p className="text-gray-600 mb-4">{process.description}</p>
             <div className="flex space-x-2">
               <button

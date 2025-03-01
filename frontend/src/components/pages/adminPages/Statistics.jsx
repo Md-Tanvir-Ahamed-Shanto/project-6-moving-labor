@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { base_uel } from '../../../config/config';
 
 const Statistic = () => {
   const [statistics, setStatistics] = useState([]);
@@ -35,10 +36,10 @@ const Statistic = () => {
     e.preventDefault();
     try {
       if (editingId) {
-        await axios.put(`/api/statistic/${editingId}`, formData);
+        await axios.put(`${base_uel}/statistic/${editingId}`, formData);
         alert('Statistic updated successfully');
       } else {
-        await axios.post('/api/statistic', formData);
+        await axios.post(`${base_uel}/statistic`, formData);
         alert('Statistic created successfully');
       }
       setFormData({ value: '', title: '', description: '' });
@@ -85,7 +86,7 @@ const Statistic = () => {
               name="value"
               value={formData.value}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
             />
           </div>
@@ -96,7 +97,7 @@ const Statistic = () => {
               name="title"
               value={formData.title}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
             />
           </div>
@@ -106,7 +107,7 @@ const Statistic = () => {
               name="description"
               value={formData.description}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full h-16 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
               rows="3"
             ></textarea>

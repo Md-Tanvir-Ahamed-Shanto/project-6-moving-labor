@@ -1,40 +1,25 @@
+import { useEffect, useState } from "react";
 import StatisticCard from "./shared/StatisticCard";
+import axios from "axios";
+import { base_uel } from "../config/config";
 
 
 const CompanyStrengths = () => {
-  const statistics = [
-    {
-      number: "13+",
-      title: "Years Of Trust",
-      description: "Delivering Smiles Since 2008",
-    },
-    {
-      number: "5000+",
-      title: "Moves Annually",
-      description: "Happily Acrosss The World",
-    },
-    {
-      number: "2+",
-      title: "Million Sq.Feet",
-      description: "Warehousing Space",
-    },
-    {
-      number: "300+",
-      title: "Trained Manpower",
-      description: "Makes Your Move Safe & On Time",
-    },
-    {
-      number: "20+",
-      title: "Branches In UK",
-      description:
-        "To Cover 69+ Destinations Nationally & 182 Countries Globally",
-    },
-    {
-      number: "100+",
-      title: "Vehicles",
-      description: "For Every Segment And Needs",
-    },
-  ];
+  const [statistics, setStatistics] = useState([])
+
+  const fetchData = async ()=>{
+    try {
+      let res = await axios.get(`${base_uel}/statistic`)
+      if (res.status === 200) {
+        setStatistics(res.data)
+      }
+    } catch (error) {
+      console.log("error",error)
+    }
+  }
+  useEffect(()=>{
+    fetchData()
+  },[])
 
   return (
     <div className="w-full bg-gray-50">
@@ -55,7 +40,7 @@ const CompanyStrengths = () => {
         {statistics.map((stat, index) => (
           <StatisticCard
             key={index}
-            number={stat.number}
+            number={stat.value}
             title={stat.title}
             description={stat.description}
           />
