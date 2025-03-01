@@ -3,15 +3,16 @@ const prisma = new PrismaClient();
 
 // Feature controller
 const createFeature = async (req, res) => {
-  const { featureName, description } = req.body;
+  const { featureName, description , iconUrl } = req.body;
   try {
-    if (!featureName || !description) {
+    if (!featureName || !description || !iconUrl) {
       return res.status(400).json({ error: "All fields are required" });
     }
     const feature = await prisma.feature.create({
       data: {
         featureName,
         description,
+        iconUrl
       },
     });
     res.status(201).json({
@@ -54,7 +55,7 @@ const getFeatureById = async (req, res) => {
 
 const updateFeature = async (req, res) => {
   const { id } = req.params;
-  const { featureName, description } = req.body;
+  const { featureName, description, iconUrl } = req.body;
   try {
     const feature = await prisma.feature.update({
       where: {
@@ -63,6 +64,7 @@ const updateFeature = async (req, res) => {
       data: {
         featureName,
         description,
+        iconUrl
       },
     });
     res.status(200).json({

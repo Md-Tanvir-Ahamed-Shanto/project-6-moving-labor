@@ -61,6 +61,7 @@ model Proces {
 model Feature {
   id          Int    @id @default(autoincrement())
   featureName String
+  iconUrl     String
   description String
 }
 
@@ -124,7 +125,7 @@ model Contact {
 model AboutUs {
   id      Int    @id @default(autoincrement())
   title   String
-  content String
+  content String @db.Text 
 }
 
 model Message {

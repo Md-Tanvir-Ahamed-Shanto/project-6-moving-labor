@@ -1,9 +1,24 @@
 import { useState , useEffect } from 'react';
 import { Phone, Mail, MapPin, Navigation } from 'lucide-react';
+import axios from 'axios';
+import {base_uel} from "../config/config.js"
 
 const Hero = () => {
   const [selectedMove, setSelectedMove] = useState('');
   const [show,setShow] = useState('Manchester')
+  const [contact, setContact] = useState([]);
+  const fetchData = async ()=>{
+    try {
+      const res = await axios.get(`${base_uel}/contact`)
+      setContact(res.data[0])
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
+
+  useEffect(()=>{
+    fetchData()
+  },[]);
   const text = ['Manchester','Whatsapp','Hello Word','hello']
 
    useEffect(() => {
@@ -86,13 +101,23 @@ const Hero = () => {
         <div className='w-full'>
             {/* Contact Header */}
         <div className="flex justify-center md:mt-24 gap-4 mb-12">
-          <a href="tel:02080048117" className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
+          <a href={`tel:${ contact?.phone[0]}`} className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
             <Phone size={20} />
-            <span>020 8004 8117</span>
+            <span>
+              {
+                contact?.phone &&
+                contact?.phone[0]
+              }
+            </span>
           </a>
-          <a href="mailto:info@ukmover.co.uk" className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
+          <a href={`mailto:${contact?.email[0]}`} className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
             <Mail size={20} />
-            <span>info@ukmover.co.uk</span>
+            <span>
+              {
+                contact?.email &&
+                contact?.email[0]
+              }
+            </span>
           </a>
         </div>
         </div>

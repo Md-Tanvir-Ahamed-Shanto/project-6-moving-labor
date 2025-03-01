@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const Messages = () => {
   const [messages, setMessages] = useState([]);
-
+  const [selectedMessage, setSelectedMessage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchMessages();
@@ -18,7 +19,10 @@ const Messages = () => {
     }
   };
 
-
+  const handleView = (message) => {
+    setSelectedMessage(message);
+    setShowModal(true);
+  };
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this message?')) {
@@ -56,6 +60,12 @@ const Messages = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <button
+                      onClick={() => handleView(message)}
+                      className="text-blue-600 hover:text-blue-900 mr-4"
+                    >
+                      View
+                    </button>
+                    <button
                       onClick={() => handleDelete(message.id)}
                       className="text-red-600 hover:text-red-900"
                     >
@@ -68,6 +78,39 @@ const Messages = () => {
           </table>
         </div>
       </div>
+
+      {/* Message Modal */}
+      {showModal && selectedMessage && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div className="mt-3">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Message Details</h3>
+              <div className="space-y-3">
+                <div>
+                  <label className="font-medium text-gray-700">From:</label>
+                  <p>{selectedMessage.name} ({selectedMessage.email})</p>
+                </div>
+                <div>
+                  <label className="font-medium text-gray-700">Subject:</label>
+                  <p>{selectedMessage.subject}</p>
+                </div>
+                <div>
+                  <label className="font-medium text-gray-700">Message:</label>
+                  <p className="whitespace-pre-wrap">{selectedMessage.message}</p>
+                </div>
+              </div>
+              <div className="mt-4">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

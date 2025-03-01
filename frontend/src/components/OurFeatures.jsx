@@ -1,39 +1,25 @@
-import { Clock, DollarSign, Globe, HeadphonesIcon } from 'lucide-react';
+import axios from 'axios';
 import FeatureCard from './shared/FeatureCard'
+import { useEffect, useState } from 'react';
+import { base_uel } from '../config/config';
 
 const OurFeatures = () => {
-    const features = [
-        {
-          icon: Clock,
-          title: "Free Booking",
-          description:
-            "Free the booking of your removal in no time, we work 24/7, providing same-day service with no time limit.",
-        },
-        {
-          icon: DollarSign,
-          title: "Affordable Pricing",
-          description:
-            "UK Mover provides market-proper services we serve is customer's satisfaction.",
-        },
-        {
-          icon: Globe,
-          title: "International Moves",
-          description:
-            "Move like International moves are done with UK Mover, just have a call to us and we make sure you are safe.",
-        },
-        {
-          icon: HeadphonesIcon,
-          title: "24/7 Service",
-          description:
-            "UK Mover provides road service to help you 24/7 with your concerns. Available any time of your services.",
-        },
-        {
-          icon: HeadphonesIcon,
-          title: "24/7 Service",
-          description:
-            "UK Mover provides road service to help you 24/7 with your concerns. Available any time of your services.",
-        },
-      ];
+  const [features, setFeatures] = useState([]);
+const fetchFeatures = async () => {
+    try {
+      let res = await axios.get(`${base_uel}/feature`)
+      if (res.status === 200) {
+        setFeatures(res.data)
+      }
+    } catch (error) {
+      console.log("error", error)
+    } finally {
+      // setLoading(false)
+    }
+  }
+  useEffect(() => {
+    fetchFeatures()
+  }, [])
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 space-y-24">
          <section>
@@ -45,11 +31,11 @@ const OurFeatures = () => {
           Customers & Make Reliable And Satisfactory Experience.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
+          {features?.map((feature, index) => (
             <FeatureCard
               key={index}
-              Icon={feature.icon}
-              title={feature.title}
+              iconUrl={feature.iconUrl}
+              featureName={feature.featureName}
               description={feature.description}
             />
           ))}
