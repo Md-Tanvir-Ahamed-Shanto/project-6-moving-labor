@@ -73,17 +73,18 @@ const getUserById = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { name, email, password, phone } = req.body;
+  const { name, email, password, phone,role } = req.body;
   try {
     const user = await prisma.user.update({
       where: {
-        id: id,
+        id: parseInt(id),
       },
       data: {
         name,
         email,
         password,
         phone,
+        role
       },
     });
     res.status(200).json(user);

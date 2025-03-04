@@ -10,7 +10,8 @@ const Customers = () => {
     name: '',
     email: '',
     phone: '',
-    address: ''
+    password: '',
+    role: 'user'
   });
 
   useEffect(() => {
@@ -121,16 +122,30 @@ const Customers = () => {
               required
             />
           </div>
+         
           <div>
-            <label className="block text-sm font-medium text-gray-700">Address</label>
-            <textarea
-              name="address"
-              value={formData.address}
+            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
               onChange={handleInputChange}
               className="mt-1 w-full px-3 py-2 border rounded-md"
-              rows="3"
-              required
+              required={!isEditing}
             />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Role</label>
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleInputChange}
+              className="mt-1 w-full px-3 py-2 border rounded-md"
+              required
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
           <div className="flex gap-4">
             <button
@@ -162,6 +177,7 @@ const Customers = () => {
                 <th className="p-4">Email</th>
                 <th className="p-4">Phone</th>
                 <th className="p-4">Address</th>
+                <th className="p-4">Role</th>
                 <th className="p-4">Actions</th>
               </tr>
             </thead>
@@ -172,6 +188,7 @@ const Customers = () => {
                   <td className="p-4">{customer.email}</td>
                   <td className="p-4">{customer.phone}</td>
                   <td className="p-4">{customer.address}</td>
+                  <td className="p-4">{customer.role}</td>
                   <td className="p-4">
                     <div className="flex gap-2">
                       <button
