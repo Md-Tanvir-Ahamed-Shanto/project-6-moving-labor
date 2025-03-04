@@ -1,45 +1,23 @@
+import { useEffect, useState } from "react";
 import PriceList from "./shared/PriceList";
+import { base_uel } from "../config/config";
+import axios from "axios";
 
 const OurPrices = () => {
-    const priceLists = [
-        {
-          title: "Furniture",
-          slug: 'fur'
-        },
-        {
-          title: "House",
-        },
-        {
-          title: "Flat",
-        },
-        {
-          title: "Office",
-        },
-        {
-          title: " Piano",
-        },
-        {
-          title: "Parcel",
-        },
-        {
-          title: "Packing Service",
-        },
-        {
-            title:" Packing Material"
-        },
-        {
-            title:"Motor Bike"
-        },
-        {
-            title: "Cleaning"
-        },
-        {
-            title:"Pet Removals"
-        },
-        {
-            title: "Other"
-        }
-      ];
+  const [priceLists,setPriceLists] = useState([])
+   const fetchData = async ()=>{
+    try {
+      let res = await axios.get(`${base_uel}/item`)
+      if(res.data){
+        setPriceLists(res.data)
+      }
+    } catch (error) {
+      console.log("error", error)
+    }
+   }
+   useEffect(()=>{
+    fetchData()
+   },[])
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 space-y-24">
          <section className="text-center">
@@ -51,7 +29,7 @@ const OurPrices = () => {
         </p>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
           {priceLists.map((price, index) => (
-            <PriceList key={index} title={price?.title} slug={price?.slug} />
+            <PriceList key={index} title={price?.name} slug={price?.slug} />
           ))}
         </div>
       </section>
