@@ -10,11 +10,12 @@ import Messages from './Messages';
 import Hero from './Hero';
 import Coverage from './Coverage';
 import Blog from './Blog';
-import Statistic from './Statistics';
 import Process from './Process';
 import Feature from './Feature';
 import Items from './Items';
 import Labor from './Labor';
+import Bookings from './Bookings';
+import AdminStatistic from './Statistics';
 
 const AdminDashboardPage = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -171,6 +172,14 @@ const AdminDashboardPage = () => {
           >
             <FaChartLine className="mr-3" /> Statistics
           </div>
+          <button
+            onClick={() => setActiveTab('bookings')}
+            className={`w-full flex items-center px-6 py-3 ${
+              activeTab === 'bookings' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaCalendarAlt className="mr-3" /> Bookings
+          </button>
         </nav>
       </div>
 
@@ -291,14 +300,12 @@ const AdminDashboardPage = () => {
             <Blog />
           </div>
         )}
-        {
-          activeTab ==='statistic' && (
-            <div>
-              <h2 className="text-2xl font-bold mb-6">Statistics Management</h2>
-              <Statistic />
-            </div>
-          )
-        }
+        {activeTab === 'bookings' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Booking Management</h2>
+            <Bookings />
+          </div>
+        )}
         {activeTab === 'process' && (
           <div>
             <h2 className="text-2xl font-bold mb-6">Process Management</h2>
@@ -323,6 +330,14 @@ const AdminDashboardPage = () => {
             <Labor />
           </div>
         )}
+        {
+          activeTab === 'statistic' && (
+            <div>
+            <h2 className="text-2xl font-bold mb-6">Labor Applications</h2>
+            <AdminStatistic />
+          </div>
+          )
+        }
       </div>
     </div>
   );

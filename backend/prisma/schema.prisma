@@ -39,7 +39,6 @@ model User {
   role      Role      @default(user)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  Booking   Booking[]
   Quotes    Quotes[]
 }
 
@@ -49,7 +48,6 @@ model Service {
   description String?
   price       Float?
   imageUrl    String
-  Booking     Booking[]
 }
 
 model Item {
@@ -86,15 +84,12 @@ model Social {
 
 model Booking {
   id                  Int           @id @default(autoincrement())
-  userId              Int
-  user                User          @relation(fields: [userId], references: [id])
-  serviceId           Int
-  service             Service       @relation(fields: [serviceId], references: [id])
-  bookingDate         DateTime
-  status              Status        @default(pending)
-  totalPrice          Float
-  specialInstructions String?
-  paymentStatus       PaymentStatus @default(pending)
+  movingType String
+  description String @db.Text
+  movingFrom String
+  movingTo String
+  email String
+  phone String
   createdAt           DateTime      @default(now())
 }
 

@@ -3,22 +3,19 @@ const prisma = new PrismaClient();
 
 // Booking controller
 const createBooking = async (req, res) => {
-  const { userId, serviceId, bookingDate, totalPrice, specialInstructions } = req.body;
+  const { movingType, description, movingFrom, movingTo, email, phone } = req.body;
   try {
-    if (!userId || !serviceId || !bookingDate || !totalPrice) {
-      return res.status(400).json({ error: "Required fields are missing" });
+    if (!movingType || !description || !movingFrom || !movingTo || !email || !phone) {
+      return res.status(400).json({ error: "All fields are required" });
     }
     const booking = await prisma.booking.create({
       data: {
-        userId: parseInt(userId),
-        serviceId: parseInt(serviceId),
-        bookingDate: new Date(bookingDate),
-        totalPrice: parseFloat(totalPrice),
-        specialInstructions,
-      },
-      include: {
-        user: true,
-        service: true,
+        movingType,
+        description,
+        movingFrom,
+        movingTo,
+        email,
+        phone
       },
     });
     res.status(201).json({
@@ -34,10 +31,9 @@ const createBooking = async (req, res) => {
 const getBookings = async (req, res) => {
   try {
     const bookings = await prisma.booking.findMany({
-      include: {
-        user: true,
-        service: true,
-      },
+      orderBy: {
+        createdAt: 'desc'
+      }
     });
     res.status(200).json(bookings);
   } catch (error) {
@@ -53,45 +49,11 @@ const getBookingById = async (req, res) => {
       where: {
         id: parseInt(id),
       },
-      include: {
-        user: true,
-        service: true,
-      },
     });
     if (!booking) {
       return res.status(404).json({ error: "Booking not found" });
     }
     res.status(200).json(booking);
-  } catch (error) {
-    console.log("error", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-
-const updateBooking = async (req, res) => {
-  const { id } = req.params;
-  const { bookingDate, totalPrice, specialInstructions, status, paymentStatus } = req.body;
-  try {
-    const booking = await prisma.booking.update({
-      where: {
-        id: parseInt(id),
-      },
-      data: {
-        bookingDate: bookingDate ? new Date(bookingDate) : undefined,
-        totalPrice: totalPrice ? parseFloat(totalPrice) : undefined,
-        specialInstructions,
-        status,
-        paymentStatus,
-      },
-      include: {
-        user: true,
-        service: true,
-      },
-    });
-    res.status(200).json({
-      message: "Booking updated successfully",
-      booking,
-    });
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -104,10 +66,6 @@ const deleteBooking = async (req, res) => {
     const booking = await prisma.booking.delete({
       where: {
         id: parseInt(id),
-      },
-      include: {
-        user: true,
-        service: true,
       },
     });
     res.status(200).json({
@@ -124,6 +82,5 @@ module.exports = {
   createBooking,
   getBookings,
   getBookingById,
-  updateBooking,
   deleteBooking,
 };

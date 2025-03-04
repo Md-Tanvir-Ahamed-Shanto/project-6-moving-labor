@@ -7,6 +7,15 @@ const Hero = () => {
   const [selectedMove, setSelectedMove] = useState("");
   const [contact, setContact] = useState([]);
   const [heroContent, setHeroContent] = useState([]);
+  const [formData, setFormData] = useState({
+    movingType: "",
+    description: "",
+    movingFrom: "",
+    movingTo: "",
+    email: "",
+    phone: ""
+  });
+
   const fetchData = async () => {
     try {
       const res = await axios.get(`${base_uel}/contact`);
@@ -15,6 +24,7 @@ const Hero = () => {
       console.log("error", error);
     }
   };
+
   const fetchHeroContent = async () => {
     try {
       const response = await axios.get(`${base_uel}/hero`);
@@ -28,6 +38,40 @@ const Hero = () => {
     fetchData();
     fetchHeroContent();
   }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const bookingData = {
+        ...formData,
+        movingType: selectedMove
+      };
+      const response = await axios.post(`${base_uel}/booking`, bookingData);
+      if (response.status === 201) {
+        alert("Booking submitted successfully!");
+        setSelectedMove("");
+        setFormData({
+          movingType: "",
+          description: "",
+          movingFrom: "",
+          movingTo: "",
+          email: "",
+          phone: ""
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      alert("Failed to submit booking. Please try again.");
+    }
+  };
 
   return (
     <div className="relative min-h-[600px] bg-blue-900/80">
@@ -53,18 +97,31 @@ const Hero = () => {
           </div>
 
           {/* Moving Form */}
-          <div className="max-w-4xl mx-auto space-y-4">
+          <form onSubmit={handleSubmit} className="max-w-4xl mx-auto space-y-4">
             <select
               className="w-full p-4 rounded text-gray-600"
               value={selectedMove}
               onChange={(e) => setSelectedMove(e.target.value)}
+              required
             >
               <option value="">What are you moving..?</option>
               <option value="house">House</option>
               <option value="office">Office</option>
               <option value="furniture">Furniture</option>
+              <option value="bike">Bike</option>
+              <option value="packaged">Packaged Item</option>
+              <option value="music">Music Instroment</option>
             </select>
-
+            <div className="w-full">
+              <textarea 
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                placeholder="Give a list What are you moving..." 
+                className="w-full p-2 h-28 rounded" 
+                required
+              ></textarea>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="relative">
                 <MapPin
@@ -73,8 +130,12 @@ const Hero = () => {
                 />
                 <input
                   type="text"
+                  name="movingFrom"
+                  value={formData.movingFrom}
+                  onChange={handleInputChange}
                   placeholder="Moving From"
                   className="w-full p-4 pl-12 rounded"
+                  required
                 />
               </div>
               <div className="relative">
@@ -84,16 +145,53 @@ const Hero = () => {
                 />
                 <input
                   type="text"
+                  name="movingTo"
+                  value={formData.movingTo}
+                  onChange={handleInputChange}
                   placeholder="Moving To"
                   className="w-full p-4 pl-12 rounded"
+                  required
+                />
+              </div>
+              <div className="relative">
+                <Navigation
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="Enter Email Address"
+                  className="w-full p-4 pl-12 rounded"
+                  required
+                />
+              </div>
+              <div className="relative">
+                <Navigation
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder="Enter Phone Number"
+                  className="w-full p-4 pl-12 rounded"
+                  required
                 />
               </div>
             </div>
 
-            <button className="w-full bg-white text-blue-900 font-bold py-4 rounded hover:bg-gray-100 transition-colors">
-              Instant Prices
+            <button 
+              type="submit"
+              className="w-full bg-white text-blue-900 font-bold py-4 rounded hover:bg-gray-100 transition-colors"
+            >
+              Booking
             </button>
-          </div>
+          </form>
         </div>
         <div className="w-full">
           {/* Contact Header */}

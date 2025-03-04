@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { base_uel } from '../../../config/config';
 
-const Statistic = () => {
+const AdminStatistic = () => {
   const [statistics, setStatistics] = useState([]);
   const [formData, setFormData] = useState({
     value: '',
@@ -148,4 +148,4 @@ const Statistic = () => {
   );
 };
 
-export default Statistic;
+export default AdminStatistic;
