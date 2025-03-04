@@ -44,10 +44,10 @@ const Navbar = () => {
           className="bg-purple-500 hover:bg-purple-800 cursor-pointer p-2 rounded-md text-white font-bold"
         >
           Login
-        </Link>
-        <div className="bg-purple-500 hover:bg-purple-800 cursor-pointer p-2 rounded-md text-white font-bold">
+        </Link >
+        <Link to={"/signup"} className="bg-purple-500 hover:bg-purple-800 cursor-pointer p-2 rounded-md text-white font-bold">
           Sign Up
-        </div>
+        </Link>
       </div>
       <div className="">
         {isOpen ? (

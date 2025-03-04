@@ -11,6 +11,7 @@ import PricePage from "./components/pages/PricePage";
 import AdminDashboardPage from "./components/pages/adminPages/AdminDashboardPage";
 import BookingPage from "./components/pages/BookingPage";
 import PrivateRoute from "./components/common/PrivateRoute";
+import SignupPage from "./components/pages/SignupPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/prices" element={<PricePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/admin" element={<PrivateRoute><AdminDashboardPage /></PrivateRoute>} />
       </Routes>

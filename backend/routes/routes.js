@@ -16,6 +16,7 @@ const heroController = require("../controllers/heroControllers");
 const coverageController = require("../controllers/coverageControllers");
 const blogController = require("../controllers/blogControllers");
 const itemController = require("../controllers/itemControllers");
+const laborController = require("../controllers/laborControllers");
 
 // Example route
 router.get("/", (req, res) => {
@@ -129,5 +130,10 @@ router.get("/item", itemController.getItems);
 router.get("/item/:id", itemController.getItemById);
 router.put("/item/:id", itemController.updateItem);
 router.delete("/item/:id", itemController.deleteItem);
+
+// labor
+router.get("/labor", laborController.getLabors)
+router.post("/labor", laborController.createLabor);
+router.delete("/labor/:id", laborController.deleteLabor);
 
 module.exports = router;

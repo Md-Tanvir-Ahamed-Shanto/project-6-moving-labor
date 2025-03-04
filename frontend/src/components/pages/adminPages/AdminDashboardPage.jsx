@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaUsers, FaTruck, FaChartLine, FaCalendarAlt, FaVial, FaFacebookMessenger, FaLocationArrow, FaBlog, FaCogs, FaStar, FaBox } from 'react-icons/fa';
+import { FaUsers, FaTruck, FaChartLine, FaCalendarAlt, FaVial, FaFacebookMessenger, FaLocationArrow, FaBlog, FaCogs, FaStar, FaBox, FaUserTie } from 'react-icons/fa';
 import { FcAbout } from "react-icons/fc";
 import axios from 'axios';
 import Contact from './Contact';
@@ -14,6 +14,7 @@ import Statistic from './Statistics';
 import Process from './Process';
 import Feature from './Feature';
 import Items from './Items';
+import Labor from './Labor';
 
 const AdminDashboardPage = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -153,6 +154,14 @@ const AdminDashboardPage = () => {
             }`}
           >
             <FaBox className="mr-3" /> Items
+          </button>
+          <button
+            onClick={() => setActiveTab('labor')}
+            className={`w-full flex items-center px-6 py-3 ${
+              activeTab === 'labor' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaUserTie className="mr-3" /> Labor Applications
           </button>
           <div
             onClick={() => setActiveTab('statistic')}
@@ -306,6 +315,12 @@ const AdminDashboardPage = () => {
           <div>
             <h2 className="text-2xl font-bold mb-6">Items Management</h2>
             <Items />
+          </div>
+        )}
+        {activeTab === 'labor' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Labor Applications</h2>
+            <Labor />
           </div>
         )}
       </div>

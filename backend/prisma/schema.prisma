@@ -53,7 +53,7 @@ model Service {
 }
 
 model Item {
-  id Int @id @default(autoincrement())
+  id   Int     @id @default(autoincrement())
   name String
   slug String?
 }
@@ -131,7 +131,7 @@ model Contact {
 model AboutUs {
   id      Int    @id @default(autoincrement())
   title   String
-  content String @db.Text 
+  content String @db.Text
 }
 
 model Message {
@@ -140,6 +140,7 @@ model Message {
   email   String
   subject String
   message String
+  createdAt      DateTime @default(now())
 }
 
 model Hero {
@@ -159,4 +160,15 @@ model Blog {
   title    String
   content  String
   imageUrl String
+}
+
+model Labor {
+  id           Int    @id @default(autoincrement())
+  fullName     String
+  email        String
+  address      String
+  phone        String
+  experience   String
+  availability String
+  createdAt      DateTime @default(now())
 }

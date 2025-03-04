@@ -28,7 +28,11 @@ const createMessage = async (req, res) => {
 
 const getMessages = async (req, res) => {
   try {
-    const messages = await prisma.message.findMany();
+    const messages = await prisma.message.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
     res.status(200).json(messages);
   } catch (error) {
     console.log("error", error);
