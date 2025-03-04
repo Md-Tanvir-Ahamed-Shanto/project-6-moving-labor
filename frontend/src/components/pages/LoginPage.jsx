@@ -30,12 +30,13 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${base_uel}/login`, formData);
+      console.log(response.data)
       if (response.data.token) {
-        if (response.data.role === 'admin') {
+        if (response?.data?.user?.role == 'admin') {
           localStorage.setItem('token', response.data.token);
           navigate('/admin');
-        } else {
-          navigate('/');
+        }else{
+          setError('You are not authorized to access this page');
         }
       }
     } catch (err) {

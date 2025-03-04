@@ -44,7 +44,7 @@ const ContactPage = () => {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-center mb-12">Contact Us</h1>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="flex flex-col items-center justify-center md:flex-row gap-8 max-w-5xl mx-auto">
             {/* Address */}
             <div className="border border-white/20 p-6 rounded-lg text-center">
               <div className="flex justify-center mb-4">
@@ -74,6 +74,7 @@ const ContactPage = () => {
             </div>
 
             {/* Phone */}
+            {contact?.phone?.length > 0 &&(
             <div className="border border-white/20 p-6 rounded-lg text-center">
               <div className="flex justify-center mb-4">
                 <svg
@@ -91,12 +92,15 @@ const ContactPage = () => {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Phone</h3>
-              {contact?.phone &&
-                contact?.phone?.map((phone, index) => (
+                <>
+                <h3 className="text-xl font-semibold mb-2">Phone</h3>
+                { contact?.phone?.map((phone, index) => (
                   <p key={index}>{phone}</p>
                 ))}
+              </>
             </div>
+              )
+            }
 
             {/* Email */}
             <div className="border border-white/20 p-6 rounded-lg text-center">

@@ -5,8 +5,8 @@ import {base_uel} from "../config/config.js"
 
 const Hero = () => {
   const [selectedMove, setSelectedMove] = useState('');
-  const [show,setShow] = useState('Manchester')
   const [contact, setContact] = useState([]);
+  const [heroContent, setHeroContent] = useState([]);
   const fetchData = async ()=>{
     try {
       const res = await axios.get(`${base_uel}/contact`)
@@ -15,29 +15,26 @@ const Hero = () => {
       console.log("error", error)
     }
   }
+  const fetchHeroContent = async () => {
+    try {
+      const response = await axios.get(`${base_uel}/hero`);
+      setHeroContent(response.data);
+    } catch (error) {
+      console.error('Error fetching hero content:', error);
+    }
+  };
 
   useEffect(()=>{
     fetchData()
+    fetchHeroContent()
   },[]);
-  const text = ['Manchester','Whatsapp','Hello Word','hello']
-
-   useEffect(() => {
-    const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * text.length);
-      setShow(text[randomIndex]);
-    }, 1000);
-  
-    return () => {
-      clearInterval(interval);
-    };
-  }, [])
   
   return (
     <div className="relative min-h-[600px] bg-blue-900/80">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://www.move.org/app/uploads/2021/05/U-Haul-trucks.jpg" 
+          src={heroContent?.[0]?.imageUrl}
           alt="Moving van background" 
           className="w-full h-full object-cover"
         />
@@ -53,11 +50,13 @@ const Hero = () => {
         {/* Main Content */}
         <div className="text-center text-white mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            House Removals <span className="text-red-500">{show}</span>
+            {
+              heroContent?.[0]?.title} 
           </h1>
           <p className="text-xl md:text-2xl">
-            UK&apos;s best house removals, office removals, man and van<br />
-            and european removals services.
+            {
+              heroContent?.[0]?.content
+            }
           </p>
         </div>
 
