@@ -5,6 +5,7 @@ import MovingProcess from "../MovingProcess"
 import ServiceSection from "../ServiceSection"
 import CompanyStrengths from "../CompanyStrengths"
 import AreasWeCover from "../AreasWeCover"
+import BlogSection from "../BlogSection"
 
 const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ const HomePage = () => {
       <Landing />
       <MovingProcess />
       <ServiceSection />
+      <BlogSection />
       <CompanyStrengths />
       <AreasWeCover />
     </div>
