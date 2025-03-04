@@ -15,6 +15,7 @@ const messageController = require("../controllers/messageControllers");
 const heroController = require("../controllers/heroControllers");
 const coverageController = require("../controllers/coverageControllers");
 const blogController = require("../controllers/blogControllers");
+const itemController = require("../controllers/itemControllers");
 
 // Example route
 router.get("/", (req, res) => {
@@ -121,5 +122,12 @@ router.get("/blog", blogController.getBlogs);
 router.get("/blog/:id", blogController.getBlogById);
 router.put("/blog/:id", blogController.updateBlog);
 router.delete("/blog/:id", blogController.deleteBlog);
+
+// item
+router.post("/item", itemController.createItem);
+router.get("/item", itemController.getItems);
+router.get("/item/:id", itemController.getItemById);
+router.put("/item/:id", itemController.updateItem);
+router.delete("/item/:id", itemController.deleteItem);
 
 module.exports = router;

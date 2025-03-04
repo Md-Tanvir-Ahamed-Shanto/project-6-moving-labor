@@ -52,6 +52,12 @@ model Service {
   Booking     Booking[]
 }
 
+model Item {
+  id Int @id @default(autoincrement())
+  name String
+  slug String?
+}
+
 model Proces {
   id          Int    @id @default(autoincrement())
   processName String

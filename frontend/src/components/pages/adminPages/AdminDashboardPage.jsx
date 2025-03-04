@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaUsers, FaTruck, FaChartLine, FaCalendarAlt, FaVial, FaFacebookMessenger, FaLocationArrow, FaBlog, FaCogs, FaStar } from 'react-icons/fa';
+import { FaUsers, FaTruck, FaChartLine, FaCalendarAlt, FaVial, FaFacebookMessenger, FaLocationArrow, FaBlog, FaCogs, FaStar, FaBox } from 'react-icons/fa';
 import { FcAbout } from "react-icons/fc";
 import axios from 'axios';
 import Contact from './Contact';
@@ -13,6 +13,7 @@ import Blog from './Blog';
 import Statistic from './Statistics';
 import Process from './Process';
 import Feature from './Feature';
+import Items from './Items';
 
 const AdminDashboardPage = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -144,6 +145,14 @@ const AdminDashboardPage = () => {
             }`}
           >
             <FaStar className="mr-3" /> Features
+          </button>
+          <button
+            onClick={() => setActiveTab('items')}
+            className={`w-full flex items-center px-6 py-3 ${
+              activeTab === 'items' ? 'bg-blue-700' : 'hover:bg-blue-700'
+            }`}
+          >
+            <FaBox className="mr-3" /> Items
           </button>
           <div
             onClick={() => setActiveTab('statistic')}
@@ -291,6 +300,12 @@ const AdminDashboardPage = () => {
           <div>
             <h2 className="text-2xl font-bold mb-6">Feature Management</h2>
             <Feature />
+          </div>
+        )}
+        {activeTab === 'items' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Items Management</h2>
+            <Items />
           </div>
         )}
       </div>
