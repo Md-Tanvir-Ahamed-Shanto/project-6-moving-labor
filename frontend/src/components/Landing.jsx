@@ -24,7 +24,7 @@ const Landing = () => {
       {/* Welcome Section */}
       <div className="text-center mb-16">
         <h1 className="text-4xl font-bold text-blue-900 mb-4">
-          Welcome To UK MOVER
+          Welcome To Moving Nice
         </h1>
         <p className="text-gray-600 max-w-3xl mx-auto">
           A Specialist Moving Company That Deals With All UK & European Moves, Packing

@@ -28,7 +28,7 @@ const ServicesPage = () => {
           Our Services
         </h1>
         <p className="text-gray-600 text-center max-w-3xl mx-auto mb-12">
-          UK Movers Are A Specialist Moving Company That Deal With All UK &
+          Moving Nices Are A Specialist Moving Company That Deal With All UK &
           European Moves, Packing & Unpacking, Cleaning And Furniture
           Dismantling & Reassembling Services.
         </p>

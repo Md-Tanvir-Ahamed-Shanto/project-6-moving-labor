@@ -18,7 +18,7 @@ const MovingProcess = () => {
     {
       icon: Truck,
       title: "MOVE YOUR THINGS",
-      description: "Want to move your items, but don't want to get tired? We are here, we can move your items with ease and safety, just book your job and sit back, UK Mover will do the rest.",
+      description: "Want to move your items, but don't want to get tired? We are here, we can move your items with ease and safety, just book your job and sit back, Moving Nice will do the rest.",
       borderColor: "border-blue-600"
     },
     {

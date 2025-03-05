@@ -10,12 +10,12 @@ const TransportServices = () => {
     {
       icon: Plane,
       title: "Air Way",
-      description: "Want to move items urgently? UK Mover has the best reputation in air cargo."
+      description: "Want to move items urgently? Moving Nice has the best reputation in air cargo."
     },
     {
       icon: Ship,
       title: "Ocean Way",
-      description: "If you want to move inter-continentally, UK Mover is the best solution."
+      description: "If you want to move inter-continentally, Moving Nice is the best solution."
     }
   ];
 

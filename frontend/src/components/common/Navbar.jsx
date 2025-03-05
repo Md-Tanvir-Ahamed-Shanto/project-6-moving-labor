@@ -5,7 +5,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex sticky top-0 z-50 shadow-md shadow-blue-900 justify-between bg-primary py-5 items-center">
-      <div className="w-full flex justify-center text-white">Logo </div>
+      <div className="w-full flex justify-center">
+        <span className="text-3xl font-extrabold tracking-wider bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-transparent bg-clip-text hover:scale-105 transition-transform duration-300 animate-pulse animation-duration-3000 drop-shadow-lg">Moving Nice</span>
+      </div>
       <div className=" max-w-7xl hidden md:block ">
         <Link
           className="text-white font-bold text-lg hover:bg-red-900 rounded-md p-2"

@@ -23,7 +23,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Description */}
           <div className="space-y-4">
-            <div className="text-2xl font-bold">UK MOVER</div>
+            <div className="text-2xl font-bold">Moving Nice</div>
             <p className="text-sm">
               A specialist moving company that deals with all UK & European moves, packing & unpacking, cleaning and furniture dismantling & reassembling services.
             </p>
@@ -113,7 +113,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="mt-8 pt-4 border-t border-blue-700 text-center">
-          <p>© 2021 <span className="text-red-500">TASMOVER</span> All rights reserved.</p>
+          <p>© 2021 <span className="text-red-500">Moving Nice</span> All rights reserved.</p>
         </div>
       </div>
     </footer>
