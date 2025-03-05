@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import ProcessStep from './shared/ProcessStep'
 import axios from 'axios';
-import { base_uel } from '../config/config';
+import { base_url } from '../config/config';
 
 const OurProcess = () => {
   const [processSteps, setProcessSteps] = useState([])
   const fetchData = async ()=>{
     try {
-      let res = await axios.get(`${base_uel}/process`)
+      let res = await axios.get(`${base_url}/process`)
       if (res.status === 200) {
         setProcessSteps(res.data)
       }

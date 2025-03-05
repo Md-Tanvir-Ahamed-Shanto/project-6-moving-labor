@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { base_uel } from '../../../config/config';
+import { base_url } from '../../../config/config';
 
 const Hero = () => {
   const [heroContent, setHeroContent] = useState([]);
@@ -17,7 +17,7 @@ const Hero = () => {
 
   const fetchHeroContent = async () => {
     try {
-      const response = await axios.get(`${base_uel}/hero`);
+      const response = await axios.get(`${base_url}/hero`);
       setHeroContent(response.data);
     } catch (error) {
       console.error('Error fetching hero content:', error);
@@ -28,9 +28,9 @@ const Hero = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`${base_uel}/hero/${currentContent.id}`, currentContent);
+        await axios.put(`${base_url}/hero/${currentContent.id}`, currentContent);
       } else {
-        await axios.post(`${base_uel}/hero`, currentContent);
+        await axios.post(`${base_url}/hero`, currentContent);
       }
       fetchHeroContent();
       setEditMode(false);
@@ -48,7 +48,7 @@ const Hero = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this hero content?')) {
       try {
-        await axios.delete(`${base_uel}/hero/${id}`);
+        await axios.delete(`${base_url}/hero/${id}`);
         fetchHeroContent();
       } catch (error) {
         console.error('Error deleting hero content:', error);

@@ -1,7 +1,7 @@
 import { MapPin } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { base_uel } from "../config/config"
+import { base_url } from "../config/config"
 import LoadingSpinner from './shared/LoadingSpinner';
 
 const AreasWeCover = () => {
@@ -10,7 +10,7 @@ const AreasWeCover = () => {
 
   const fetchAreas = async () => {
     try {
-      let res = await axios.get(`${base_uel}/coverage`)
+      let res = await axios.get(`${base_url}/coverage`)
       if (res.status === 200) {
         setAreas(res.data)
       }

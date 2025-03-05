@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { base_uel } from "../../config/config";
+import { base_url } from "../../config/config";
 import axios from "axios";
 
 const ContactPage = () => {
@@ -12,7 +12,7 @@ const ContactPage = () => {
   });
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${base_uel}/contact`);
+      const res = await axios.get(`${base_url}/contact`);
       setContact(res.data[0]);
     } catch (error) {
       console.log("error", error);
@@ -21,7 +21,7 @@ const ContactPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await axios.post(`${base_uel}/message`, currentMessage);
+      let res = await axios.post(`${base_url}/message`, currentMessage);
       if (res.status === 201) {
         alert("Message sent successfully");
         setCurrentMessage({ name: "", email: "", subject: "", message: "" });

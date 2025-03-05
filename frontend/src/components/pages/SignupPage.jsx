@@ -8,7 +8,7 @@ import {
   FaBriefcase,
 } from "react-icons/fa";
 import axios from "axios";
-import { base_uel } from "../../config/config";
+import { base_url } from "../../config/config";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +31,7 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${base_uel}/labor`, formData);
+      const response = await axios.post(`${base_url}/labor`, formData);
       if (response.data) {
         alert("Labor Registration Succesfully !");
         setFormData({

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import PriceList from "./shared/PriceList";
-import { base_uel } from "../config/config";
+import { base_url } from "../config/config";
 import axios from "axios";
 
 const OurPrices = () => {
   const [priceLists,setPriceLists] = useState([])
    const fetchData = async ()=>{
     try {
-      let res = await axios.get(`${base_uel}/item`)
+      let res = await axios.get(`${base_url}/item`)
       if(res.data){
         setPriceLists(res.data)
       }

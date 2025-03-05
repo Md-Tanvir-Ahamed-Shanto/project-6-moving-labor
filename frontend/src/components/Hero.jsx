@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Phone, Mail, MapPin, Navigation } from "lucide-react";
 import axios from "axios";
-import { base_uel } from "../config/config.js";
+import { base_url } from "../config/config.js";
 
 const Hero = () => {
   const [selectedMove, setSelectedMove] = useState("");
@@ -18,7 +18,7 @@ const Hero = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${base_uel}/contact`);
+      const res = await axios.get(`${base_url}/contact`);
       setContact(res?.data[0]);
     } catch (error) {
       console.log("error", error);
@@ -27,7 +27,7 @@ const Hero = () => {
 
   const fetchHeroContent = async () => {
     try {
-      const response = await axios.get(`${base_uel}/hero`);
+      const response = await axios.get(`${base_url}/hero`);
       setHeroContent(response.data);
     } catch (error) {
       console.error("Error fetching hero content:", error);
@@ -54,7 +54,7 @@ const Hero = () => {
         ...formData,
         movingType: selectedMove
       };
-      const response = await axios.post(`${base_uel}/booking`, bookingData);
+      const response = await axios.post(`${base_url}/booking`, bookingData);
       if (response.status === 201) {
         alert("Booking submitted successfully!");
         setSelectedMove("");

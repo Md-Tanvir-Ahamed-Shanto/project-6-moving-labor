@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { base_uel } from '../../../config/config';
+import { base_url } from '../../../config/config';
 
 const Feature = () => {
   const [features, setFeatures] = useState([]);
@@ -17,7 +17,7 @@ const Feature = () => {
 
   const fetchFeatures = async () => {
     try {
-      const response = await axios.get(`${base_uel}/feature`);
+      const response = await axios.get(`${base_url}/feature`);
       setFeatures(response.data);
     } catch (error) {
       console.error('Error fetching features:', error);
@@ -28,10 +28,10 @@ const Feature = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`${base_uel}/feature/${currentFeature.id}`, currentFeature);
+        await axios.put(`${base_url}/feature/${currentFeature.id}`, currentFeature);
         alert('Feature updated successfully');
       } else {
-        await axios.post(`${base_uel}/feature`, currentFeature);
+        await axios.post(`${base_url}/feature`, currentFeature);
         alert('Feature created successfully');
       }
       fetchFeatures();
@@ -51,7 +51,7 @@ const Feature = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this feature?')) {
       try {
-        await axios.delete(`${base_uel}/feature/${id}`);
+        await axios.delete(`${base_url}/feature/${id}`);
         alert('Feature deleted successfully');
         fetchFeatures();
       } catch (error) {

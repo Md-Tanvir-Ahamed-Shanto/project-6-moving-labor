@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { base_url } from "../config/config";
 const BlogSection = () => {
   const [blogs, setBlogs] = useState([]);
   const [expandedBlogs, setExpandedBlogs] = useState({});
@@ -8,7 +8,7 @@ const BlogSection = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/blog");
+        const response = await axios.get(`${base_url}/blog`);
         setBlogs(response.data);
         const initialExpandedState = {};
         response.data.forEach(blog => {

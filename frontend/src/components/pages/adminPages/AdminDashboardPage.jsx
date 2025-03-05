@@ -16,6 +16,7 @@ import Items from './Items';
 import Labor from './Labor';
 import Bookings from './Bookings';
 import AdminStatistic from './Statistics';
+import { base_url } from '../../../config/config';
 
 const AdminDashboardPage = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -29,7 +30,7 @@ const AdminDashboardPage = () => {
 
   const fetchStatistics = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/statistic');
+      const response = await axios.get(`${base_url}/statistic`);
       setStatistics(response.data);
     } catch (error) {
       console.error('Error fetching statistics:', error);
@@ -38,7 +39,7 @@ const AdminDashboardPage = () => {
 
   const fetchRecentBookings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/booking');
+      const response = await axios.get(`${base_url}/booking`);
       setRecentBookings(response.data.slice(0, 5)); // Get only the 5 most recent bookings
     } catch (error) {
       console.error('Error fetching bookings:', error);

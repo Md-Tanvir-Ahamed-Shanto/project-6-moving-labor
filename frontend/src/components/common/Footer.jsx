@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-import { base_uel } from '../../config/config';
+import { base_url } from '../../config/config';
 import { useEffect, useState } from 'react';
 
 const Footer = () => {
   const [contact, setContact] = useState([]);
   const fetchData = async ()=>{
     try {
-      const res = await axios.get(`${base_uel}/contact`)
+      const res = await axios.get(`${base_url}/contact`)
       setContact(res.data[0])
     } catch (error) {
       console.log("error", error)

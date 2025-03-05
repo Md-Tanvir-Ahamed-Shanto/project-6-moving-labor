@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { base_uel } from '../../../config/config';
+import { base_url } from '../../../config/config';
 
 const Labor = () => {
   const [labors, setLabors] = useState([]);
@@ -13,7 +13,7 @@ const Labor = () => {
 
   const fetchLabors = async () => {
     try {
-      const response = await axios.get(`${base_uel}/labor`);
+      const response = await axios.get(`${base_url}/labor`);
       setLabors(response.data);
     } catch (error) {
       console.error('Error fetching labors:', error);
@@ -28,7 +28,7 @@ const Labor = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this labor application?')) {
       try {
-        await axios.delete(`${base_uel}/labor/${id}`);
+        await axios.delete(`${base_url}/labor/${id}`);
         alert('Labor application deleted successfully');
         fetchLabors();
       } catch (error) {

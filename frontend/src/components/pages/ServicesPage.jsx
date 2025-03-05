@@ -1,7 +1,7 @@
 import axios from "axios";
 import OurFeatures from "../OurFeatures";
 import OurProcess from "../OurProcess";
-import { base_uel } from "../../config/config";
+import { base_url } from "../../config/config";
 import { useEffect, useState } from "react";
 
 const ServicesPage = () => {
@@ -9,7 +9,7 @@ const ServicesPage = () => {
  
   const fetchData = async  ()=>{
     try {
-      let res = await axios.get(`${base_uel}/service`)
+      let res = await axios.get(`${base_url}/service`)
       if(res.data){
         setServices(res.data)
       }

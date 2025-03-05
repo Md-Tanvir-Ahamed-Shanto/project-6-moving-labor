@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import { base_uel } from '../../../config/config';
+import { base_url } from '../../../config/config';
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -20,7 +20,7 @@ const Services = () => {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get(`${base_uel}/service`);
+      const response = await axios.get(`${base_url}/service`);
       setServices(response.data);
     } catch (error) {
       console.error('Error fetching services:', error);
@@ -38,9 +38,9 @@ const Services = () => {
     e.preventDefault();
     try {
       if (isEditing) {
-        await axios.put(`${base_uel}/service/${editId}`, formData);
+        await axios.put(`${base_url}/service/${editId}`, formData);
       } else {
-        await axios.post(`${base_uel}/service`, formData);
+        await axios.post(`${base_url}/service`, formData);
       }
       resetForm();
       fetchServices();
@@ -63,7 +63,7 @@ const Services = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this service?')) {
       try {
-        await axios.delete(`${base_uel}/service/${id}`);
+        await axios.delete(`${base_url}/service/${id}`);
         fetchServices();
       } catch (error) {
         console.error('Error deleting service:', error);

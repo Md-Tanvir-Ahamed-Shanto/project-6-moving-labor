@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { base_uel } from '../../../config/config';
+import { base_url } from '../../../config/config';
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -13,7 +13,7 @@ const Bookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get(`${base_uel}/booking`);
+      const response = await axios.get(`${base_url}/booking`);
       setBookings(response.data);
     } catch (error) {
       console.error('Error fetching bookings:', error);
@@ -23,7 +23,7 @@ const Bookings = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this booking?')) {
       try {
-        await axios.delete(`${base_uel}/booking/${id}`);
+        await axios.delete(`${base_url}/booking/${id}`);
         alert('Booking deleted successfully');
         fetchBookings();
       } catch (error) {

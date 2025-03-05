@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import StatisticCard from "./shared/StatisticCard";
 import axios from "axios";
-import { base_uel } from "../config/config";
+import { base_url } from "../config/config";
 
 
 const CompanyStrengths = () => {
@@ -9,7 +9,7 @@ const CompanyStrengths = () => {
 
   const fetchData = async ()=>{
     try {
-      let res = await axios.get(`${base_uel}/statistic`)
+      let res = await axios.get(`${base_url}/statistic`)
       if (res.status === 200) {
         setStatistics(res.data)
       }

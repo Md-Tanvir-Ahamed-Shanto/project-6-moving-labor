@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import AboutCard from "./shared/AboutCard";
 import axios from "axios";
-import { base_uel } from "../config/config";
+import { base_url } from "../config/config";
 
 const Landing = () => {
   const [abouts, setAbouts] = useState([])
   const fetchAbouts = async () =>{
     try {
-      let res = await axios.get(`${base_uel}/about-us`)
+      let res = await axios.get(`${base_url}/about-us`)
       if(res.data){
         setAbouts(res.data)
       }

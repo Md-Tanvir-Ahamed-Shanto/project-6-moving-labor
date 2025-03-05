@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { base_url } from '../../../config/config';
 
 const Coverage = () => {
   const [coverageAreas, setCoverageAreas] = useState([]);
@@ -14,7 +15,7 @@ const Coverage = () => {
 
   const fetchCoverageAreas = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/coverage');
+      const response = await axios.get(`${base_url}/coverage`);
       setCoverageAreas(response.data);
     } catch (error) {
       console.error('Error fetching coverage areas:', error);
@@ -25,9 +26,9 @@ const Coverage = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`http://localhost:5000/api/coverage/${currentArea.id}`, currentArea);
+        await axios.put(`${base_url}/coverage/${currentArea.id}`, currentArea);
       } else {
-        await axios.post('http://localhost:5000/api/coverage', currentArea);
+        await axios.post(`${base_url}/coverage`, currentArea);
       }
       fetchCoverageAreas();
       setEditMode(false);
@@ -45,7 +46,7 @@ const Coverage = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this coverage area?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/coverage/${id}`);
+        await axios.delete(`${base_url}/coverage/${id}`);
         fetchCoverageAreas();
       } catch (error) {
         console.error('Error deleting coverage area:', error);

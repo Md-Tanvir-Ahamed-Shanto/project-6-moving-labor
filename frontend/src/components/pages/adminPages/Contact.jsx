@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import { base_url } from "../../../config/config";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Contact = () => {
   console.log("from value", inputValues);
   const fetchContacts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/contact");
+      const response = await axios.get(`${base_url}/contact`);
       setContacts(response.data);
     } catch (error) {
       console.log("error", error);
@@ -63,12 +64,12 @@ const Contact = () => {
     try {
       if (isEditing) {
         await axios.put(
-          `http://localhost:5000/api/contact/${editId}`,
+          `${base_url}/contact/${editId}`,
           formData
         );
         alert("Contact updated successfully!");
       } else {
-        await axios.post("http://localhost:5000/api/contact", formData);
+        await axios.post(`${base_url}/contact`, formData);
         alert("Contact added successfully!");
       }
       resetForm();
@@ -94,7 +95,7 @@ const Contact = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this contact?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/contact/${id}`);
+        await axios.delete(`${base_url}/contact/${id}`);
         alert.success("Contact deleted successfully!");
         fetchContacts();
       } catch (error) {

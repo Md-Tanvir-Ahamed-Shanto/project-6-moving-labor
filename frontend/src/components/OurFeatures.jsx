@@ -1,13 +1,13 @@
 import axios from 'axios';
 import FeatureCard from './shared/FeatureCard'
 import { useEffect, useState } from 'react';
-import { base_uel } from '../config/config';
+import { base_url } from '../config/config';
 
 const OurFeatures = () => {
   const [features, setFeatures] = useState([]);
 const fetchFeatures = async () => {
     try {
-      let res = await axios.get(`${base_uel}/feature`)
+      let res = await axios.get(`${base_url}/feature`)
       if (res.status === 200) {
         setFeatures(res.data)
       }

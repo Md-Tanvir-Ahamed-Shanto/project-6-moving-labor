@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { base_url } from '../../../config/config';
 
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -16,7 +17,7 @@ const Blog = () => {
 
   const fetchBlogPosts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/blog');
+      const response = await axios.get(`${base_url}/blog`);
       setBlogPosts(response.data);
     } catch (error) {
       console.error('Error fetching blog posts:', error);
@@ -27,9 +28,9 @@ const Blog = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`http://localhost:5000/api/blog/${currentPost.id}`, currentPost);
+        await axios.put(`${base_url}/blog/${currentPost.id}`, currentPost);
       } else {
-        await axios.post('http://localhost:5000/api/blog', currentPost);
+        await axios.post(`${base_url}/blog`, currentPost);
       }
       fetchBlogPosts();
       setEditMode(false);
@@ -47,7 +48,7 @@ const Blog = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this blog post?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/blog/${id}`);
+        await axios.delete(`${base_url}/blog/${id}`);
         fetchBlogPosts();
       } catch (error) {
         console.error('Error deleting blog post:', error);

@@ -1,5 +1,6 @@
 import  { useState, useEffect } from "react";
 import axios from "axios";
+import { base_url } from "../../../config/config";
 
 const Items = () => {
   const [items, setItems] = useState([]);
@@ -15,7 +16,7 @@ const Items = () => {
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/item");
+      const response = await axios.get(`${base_url}/item`);
       setItems(response.data);
     } catch (error) {
       console.error("Error fetching items:", error);
@@ -27,10 +28,10 @@ const Items = () => {
     e.preventDefault();
     try {
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/item/${editingId}`, formData);
+        await axios.put(`${base_url}/item/${editingId}`, formData);
         alert("Item updated successfully");
       } else {
-        await axios.post("http://localhost:5000/api/item", formData);
+        await axios.post(`${base_url}/item`, formData);
         alert("Item created successfully");
       }
       setFormData({ name: "", slug: "" });
@@ -50,7 +51,7 @@ const Items = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/item/${id}`);
+        await axios.delete(`${base_url}/item/${id}`);
         alert("Item deleted successfully");
         fetchItems();
       } catch (error) {

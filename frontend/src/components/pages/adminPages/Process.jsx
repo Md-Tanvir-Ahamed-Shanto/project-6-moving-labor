@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { base_uel } from '../../../config/config';
+import { base_url } from '../../../config/config';
 
 const Process = () => {
   const [processes, setProcesses] = useState([]);
@@ -17,7 +17,7 @@ const Process = () => {
 
   const fetchProcesses = async () => {
     try {
-      const response = await axios.get(`${base_uel}/process`);
+      const response = await axios.get(`${base_url}/process`);
       setProcesses(response.data);
     } catch (error) {
       console.error('Error fetching processes:', error);
@@ -28,10 +28,10 @@ const Process = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`${base_uel}/process/${currentProcess.id}`, currentProcess);
+        await axios.put(`${base_url}/process/${currentProcess.id}`, currentProcess);
         alert('Process updated successfully');
       } else {
-        await axios.post(`${base_uel}/process`, currentProcess);
+        await axios.post(`${base_url}/process`, currentProcess);
         alert('Process created successfully');
       }
       fetchProcesses();
@@ -51,7 +51,7 @@ const Process = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this process?')) {
       try {
-        await axios.delete(`${base_uel}/process/${id}`);
+        await axios.delete(`${base_url}/process/${id}`);
         alert('Process deleted successfully');
         fetchProcesses();
       } catch (error) {

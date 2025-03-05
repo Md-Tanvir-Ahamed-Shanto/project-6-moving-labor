@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaLock, FaEnvelope } from 'react-icons/fa';
 import axios from 'axios';
-import { base_uel } from '../../config/config';
+import { base_url } from '../../config/config';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${base_uel}/login`, formData);
+      const response = await axios.post(`${base_url}/login`, formData);
       console.log(response.data)
       if (response.data.token) {
         if (response?.data?.user?.role == 'admin') {

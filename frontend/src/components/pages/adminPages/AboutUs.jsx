@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { base_url } from '../../../config/config';
 
 const AboutUs = () => {
   const [aboutUsContent, setAboutUsContent] = useState([]);
@@ -12,7 +13,7 @@ const AboutUs = () => {
 
   const fetchAboutUsContent = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/about-us');
+      const response = await axios.get(`${base_url}/about-us`);
       setAboutUsContent(response.data);
     } catch (error) {
       console.error('Error fetching about us content:', error);
@@ -23,9 +24,9 @@ const AboutUs = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`http://localhost:5000/api/about-us/${currentContent.id}`, currentContent);
+        await axios.put(`${base_url}/about-us/${currentContent.id}`, currentContent);
       } else {
-        await axios.post('http://localhost:5000/api/about-us', currentContent);
+        await axios.post(`${base_url}/about-us`, currentContent);
       }
       fetchAboutUsContent();
       setEditMode(false);
@@ -43,7 +44,7 @@ const AboutUs = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this content?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/about-us/${id}`);
+        await axios.delete(`${base_url}/about-us/${id}`);
         fetchAboutUsContent();
       } catch (error) {
         console.error('Error deleting about us content:', error);

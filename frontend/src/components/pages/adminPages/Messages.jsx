@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { base_url } from '../../../config/config';
 
 const Messages = () => {
   const [messages, setMessages] = useState([]);
@@ -12,7 +13,7 @@ const Messages = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/message');
+      const response = await axios.get(`${base_url}/message`);
       setMessages(response.data);
     } catch (error) {
       console.error('Error fetching messages:', error);
@@ -27,7 +28,7 @@ const Messages = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this message?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/message/${id}`);
+        await axios.delete(`${base_url}/message/${id}`);
         fetchMessages();
       } catch (error) {
         console.error('Error deleting message:', error);

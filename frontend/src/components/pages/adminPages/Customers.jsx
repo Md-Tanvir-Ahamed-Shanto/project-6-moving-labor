@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { base_url } from '../../../config/config';
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
@@ -20,7 +21,7 @@ const Customers = () => {
 
   const fetchCustomers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/user');
+      const response = await axios.get(`${base_url}/user`);
       setCustomers(response.data);
     } catch (error) {
       console.error('Error fetching customers:', error);
@@ -38,9 +39,9 @@ const Customers = () => {
     e.preventDefault();
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:5000/api/user/${editId}`, formData);
+        await axios.put(`${base_url}/user/${editId}`, formData);
       } else {
-        await axios.post('http://localhost:5000/api/user', formData);
+        await axios.post(`${base_url}/user`, formData);
       }
       resetForm();
       fetchCustomers();
@@ -63,7 +64,7 @@ const Customers = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this customer?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/user/${id}`);
+        await axios.delete(`${base_url}/user/${id}`);
         fetchCustomers();
       } catch (error) {
         console.error('Error deleting customer:', error);

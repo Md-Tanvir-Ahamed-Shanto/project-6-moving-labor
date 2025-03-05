@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { base_uel } from '../../../config/config';
+import { base_url } from '../../../config/config';
 
 const AdminStatistic = () => {
   const [statistics, setStatistics] = useState([]);
@@ -17,7 +17,7 @@ const AdminStatistic = () => {
 
   const fetchStatistics = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/statistic');
+      const response = await axios.get(`${base_url}/statistic`);
       setStatistics(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Error fetching statistics:', error);
@@ -36,10 +36,10 @@ const AdminStatistic = () => {
     e.preventDefault();
     try {
       if (editingId) {
-        await axios.put(`${base_uel}/statistic/${editingId}`, formData);
+        await axios.put(`${base_url}/statistic/${editingId}`, formData);
         alert('Statistic updated successfully');
       } else {
-        await axios.post(`${base_uel}/statistic`, formData);
+        await axios.post(`${base_url}/statistic`, formData);
         alert('Statistic created successfully');
       }
       setFormData({ value: '', title: '', description: '' });
@@ -63,7 +63,7 @@ const AdminStatistic = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this statistic?')) {
       try {
-        await axios.delete(`/api/statistic/${id}`);
+        await axios.delete(`${base_url}/statistic/${id}`);
     alert('Statistic deleted successfully');
         fetchStatistics();
       } catch (error) {
